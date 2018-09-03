@@ -1,0 +1,74 @@
+ <!-- <div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>I'm in the AppComponent!</h3>
+      <hr>
+      <app-servers></app-servers>
+    </div>
+  </div>
+</div> -->
+ 
+
+ 
+
+<ngx-datatable
+         
+          [rows]="rows"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [limit]="10"
+          [selected]="selected"
+          [selectionType]="'checkbox'"
+          [selectAllRowsOnPage]="false"
+          
+          
+          (select)='onRowsSelect($event)' >
+          <ngx-datatable-column [width]="30" [sortable]="false" >
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+              <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+              <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"/>
+            </ng-template>
+        </ngx-datatable-column>
+       
+          <ngx-datatable-column name="Name">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{column.name}}</span>
+              <div *ngIf="showFilter"><input type="text" placeholder="Name"  value="" (keyup)="filterByName($event)"/></div>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{value}}
+              
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Gender">
+
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{column.name}}</span>
+              <div *ngIf="showFilter"><input type="text" placeholder="Gender" (keyup)="filterByGender($event)" /></div>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{value}}
+              
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Company">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{column.name}}</span>
+              <div *ngIf="showFilter"><input type="text" placeholder="Company"/></div>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{value}}
+              
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      
+
+        <div>
+          <div><span (click)="showAll();">Show All</span></div>
+          <div><span (click)="showSelected(); ">Show Selected</span></div>
+        </div>
